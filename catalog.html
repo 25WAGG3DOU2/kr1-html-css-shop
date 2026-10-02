@@ -15,29 +15,51 @@
     />
     <meta
       property="og:image"
-      content="https://username.github.io/kr1-html-css-shop/images/preview.jpg"
+      content="https://25wagg3dou2.github.io/kr1-html-css-shop/images/preview.jpg"
     />
 
     <title>Каталог товаров — Учебный интернет-магазин</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("shop:theme");
+          var theme =
+            saved === "light" || saved === "dark"
+              ? saved
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.dataset.theme = theme;
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/main.js" defer></script>
   </head>
   <body>
     <header class="site-header">
       <div class="site-header__inner">
-        <a class="site-header__logo" href="index.html">ShopProject</a>
+        <a class="site-header__logo" href="index.html">GamingLARP</a>
 
         <nav class="site-nav" aria-label="Основная навигация">
           <ul class="site-nav__list">
             <li class="site-nav__item">
-              <a
-                class="site-nav__link site-nav__link--active"
-                href="index.html"
-              >
-                Главная
-              </a>
+              <a class="site-nav__link" href="index.html">Главная</a>
             </li>
             <li class="site-nav__item">
-              <a class="site-nav__link" href="catalog.html">Каталог</a>
+              <a
+                class="site-nav__link site-nav__link--active"
+                href="catalog.html"
+                aria-current="page"
+              >
+                Каталог
+              </a>
             </li>
             <li class="site-nav__item">
               <a class="site-nav__link" href="contacts.html">Контакты</a>
@@ -49,6 +71,28 @@
             </li>
           </ul>
         </nav>
+
+        <div class="site-header__actions">
+          <a
+            class="favorites-link"
+            href="catalog.html#favorites"
+            aria-label="Избранные товары"
+          >
+            ♥ Избранное
+            <span class="favorites-link__count" data-favorites-count>0</span>
+          </a>
+
+          <button
+            class="theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-label="Переключить тему"
+            aria-pressed="false"
+            title="Переключить тему"
+          >
+            <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -120,34 +164,207 @@
           <h2>Список товаров</h2>
 
           <div class="products-grid">
-            <!-- Карточки товаров -->
+            <!-- 1. ASUS ROG Strix Scope II RX -->
+            <article class="product-card" data-product-id="keyboard-asus-rog">
+              <button
+                class="favorite-btn"
+                type="button"
+                aria-label="Добавить в избранное"
+                data-favorite
+              >
+                ♥
+              </button>
+              <h3 class="product-card__title">ASUS ROG Strix Scope II RX</h3>
+              <p class="product-card__description">
+                Оптико-механические переключатели ROG RX Red, ресурс 100 млн
+                нажатий, защита IP57, PBT-кейкапы и съёмная подставка.
+              </p>
+              <p class="product-card__price">18 990 ₽</p>
+              <button
+                class="button product-card__button"
+                type="button"
+                data-product="ASUS ROG Strix Scope II RX"
+              >
+                Заказать
+              </button>
+            </article>
+
+            <!-- 2. NuPhy Air60 HE -->
+            <article class="product-card" data-product-id="keyboard-nuphy">
+              <button
+                class="favorite-btn"
+                type="button"
+                aria-label="Добавить в избранное"
+                data-favorite
+              >
+                ♥
+              </button>
+              <h3 class="product-card__title">NuPhy Air60 HE</h3>
+              <p class="product-card__description">
+                Компактная 60% клавиатура на Hall Effect-переключателях, Rapid
+                Trigger, частота опроса 8000 Гц, низкопрофильный корпус.
+              </p>
+              <p class="product-card__price">14 500 ₽</p>
+              <button
+                class="button product-card__button"
+                type="button"
+                data-product="NuPhy Air60 HE"
+              >
+                Заказать
+              </button>
+            </article>
+
+            <!-- 3. Razer DeathAdder V4 Pro -->
+            <article class="product-card" data-product-id="mouse-razer-da">
+              <button
+                class="favorite-btn"
+                type="button"
+                aria-label="Добавить в избранное"
+                data-favorite
+              >
+                ♥
+              </button>
+              <h3 class="product-card__title">Razer DeathAdder V4 Pro</h3>
+              <p class="product-card__description">
+                Сенсор 45 000 DPI, 65 г, оптические переключатели, до 150 часов
+                автономности, частота опроса 8000 Гц.
+              </p>
+              <p class="product-card__price">12 990 ₽</p>
+              <button
+                class="button product-card__button"
+                type="button"
+                data-product="Razer DeathAdder V4 Pro"
+              >
+                Заказать
+              </button>
+            </article>
+
+            <!-- 4. Logitech G Pro X Superlight 2 -->
+            <article class="product-card" data-product-id="mouse-logitech-gpro">
+              <button
+                class="favorite-btn"
+                type="button"
+                aria-label="Добавить в избранное"
+                data-favorite
+              >
+                ♥
+              </button>
+              <h3 class="product-card__title">Logitech G Pro X Superlight 2</h3>
+              <p class="product-card__description">
+                Сенсор HERO 2 с 32 000 DPI, вес 60 г, гибридные переключатели,
+                до 95 часов работы без подсветки.
+              </p>
+              <p class="product-card__price">14 490 ₽</p>
+              <button
+                class="button product-card__button"
+                type="button"
+                data-product="Logitech G Pro X Superlight 2"
+              >
+                Заказать
+              </button>
+            </article>
+
+            <!-- 5. Razer Viper V3 HyperSpeed -->
+            <article class="product-card" data-product-id="mouse-razer-viper">
+              <button
+                class="favorite-btn"
+                type="button"
+                aria-label="Добавить в избранное"
+                data-favorite
+              >
+                ♥
+              </button>
+              <h3 class="product-card__title">Razer Viper V3 HyperSpeed</h3>
+              <p class="product-card__description">
+                Беспроводная мышь для киберспорта: сенсор 30 000 DPI, до 280
+                часов от одной батарейки AA, симметричный корпус.
+              </p>
+              <p class="product-card__price">5 490 ₽</p>
+              <button
+                class="button product-card__button"
+                type="button"
+                data-product="Razer Viper V3 HyperSpeed"
+              >
+                Заказать
+              </button>
+            </article>
+
+            <!-- 6. AOC Agon Pro AG276QZD -->
+            <article class="product-card" data-product-id="monitor-aoc-agon">
+              <button
+                class="favorite-btn"
+                type="button"
+                aria-label="Добавить в избранное"
+                data-favorite
+              >
+                ♥
+              </button>
+              <h3 class="product-card__title">AOC Agon Pro AG276QZD</h3>
+              <p class="product-card__description">
+                27" QD-OLED, 240 Гц, 0.03 мс GtG, 100% sRGB, HDR400. Идеален для
+                соревновательных шутеров и работы с графикой.
+              </p>
+              <p class="product-card__price">64 990 ₽</p>
+              <button
+                class="button product-card__button"
+                type="button"
+                data-product="AOC Agon Pro AG276QZD"
+              >
+                Заказать
+              </button>
+            </article>
+
+            <!-- 7. SteelSeries Arctis Nova Pro -->
+            <article class="product-card" data-product-id="headset-steelseries">
+              <button
+                class="favorite-btn"
+                type="button"
+                aria-label="Добавить в избранное"
+                data-favorite
+              >
+                ♥
+              </button>
+              <h3 class="product-card__title">SteelSeries Arctis Nova Pro</h3>
+              <p class="product-card__description">
+                Активное шумоподавление, 360° Spatial Audio, сменные
+                аккумуляторы, поддержка Hi-Res Audio. Для игр и работы.
+              </p>
+              <p class="product-card__price">29 990 ₽</p>
+              <button
+                class="button product-card__button"
+                type="button"
+                data-product="SteelSeries Arctis Nova Pro"
+              >
+                Заказать
+              </button>
+            </article>
+
+            <!-- 8. HyperX Fury S Pro Extra Large -->
+            <article class="product-card" data-product-id="mousepad-hyperx">
+              <button
+                class="favorite-btn"
+                type="button"
+                aria-label="Добавить в избранное"
+                data-favorite
+              >
+                ♥
+              </button>
+              <h3 class="product-card__title">HyperX Fury S Pro XL</h3>
+              <p class="product-card__description">
+                900×420×4 мм, тканевая поверхность с микроплетением, боковая
+                прострочка, прорезиненная основа. Стирается в машинке.
+              </p>
+              <p class="product-card__price">2 490 ₽</p>
+              <button
+                class="button product-card__button"
+                type="button"
+                data-product="HyperX Fury S Pro Extra Large"
+              >
+                Заказать
+              </button>
+            </article>
           </div>
         </section>
-      </section>
-
-      <section class="section">
-        <h2>Список товаров</h2>
-
-        <article class="product-card">
-          <h3>Товар 1</h3>
-          <p>Краткое описание учебного товара.</p>
-          <p>Цена: 1000 руб.</p>
-          <a class="button" href="index.html#popular">Подробнее</a>
-        </article>
-
-        <article class="product-card">
-          <h3>Товар 2</h3>
-          <p>Краткое описание учебного товара.</p>
-          <p>Цена: 1500 руб.</p>
-          <a class="button" href="index.html#popular">Подробнее</a>
-        </article>
-
-        <article class="product-card">
-          <h3>Товар 3</h3>
-          <p>Краткое описание учебного товара.</p>
-          <p>Цена: 2000 руб.</p>
-          <a class="button" href="index.html#popular">Подробнее</a>
-        </article>
       </section>
     </main>
 
@@ -155,5 +372,108 @@
       <p>&copy; 2026 Учебный проект. Все права защищены.</p>
       <p>Дисциплина: Фронтенд и бэкенд разработка</p>
     </footer>
+
+    <dialog
+      class="order-dialog"
+      id="order-dialog"
+      aria-labelledby="order-dialog-title"
+    >
+      <h2 id="order-dialog-title">Оформление заявки</h2>
+
+      <form
+        class="order-form"
+        id="order-form"
+        action="#"
+        method="post"
+        novalidate
+      >
+        <input id="selected-product" name="selected-product" type="hidden" />
+
+        <div class="form-field">
+          <label for="order-name">Имя</label>
+          <input
+            id="order-name"
+            name="name"
+            type="text"
+            placeholder="Введите ваше имя"
+            minlength="2"
+            autocomplete="given-name"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="order-email">E-mail</label>
+          <input
+            id="order-email"
+            name="email"
+            type="email"
+            placeholder="example@mail.ru"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="order-phone">Телефон</label>
+          <input
+            id="order-phone"
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            placeholder="+7 (900) 000-00-00"
+            pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
+            required
+          />
+          <small>Формат: +7 (900) 000-00-00</small>
+        </div>
+
+        <div class="form-field">
+          <label for="order-date">Дата связи</label>
+          <input id="order-date" name="date" type="date" />
+        </div>
+
+        <div class="form-field">
+          <label for="order-topic">Тема заявки</label>
+          <select id="order-topic" name="topic" required>
+            <option value="">Выберите тему</option>
+            <option value="product">Заказ товара</option>
+            <option value="consultation">Консультация</option>
+            <option value="delivery">Доставка</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="order-comment">Комментарий</label>
+          <textarea
+            id="order-comment"
+            name="comment"
+            rows="4"
+            placeholder="Укажите дополнительную информацию"
+          ></textarea>
+        </div>
+
+        <div class="form-field form-field--checkbox">
+          <label>
+            <input
+              id="order-agreement"
+              name="agreement"
+              type="checkbox"
+              required
+            />
+            Я согласен на обработку данных
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="close-order-dialog">Закрыть</button>
+          <button type="submit">Отправить заявку</button>
+        </div>
+      </form>
+    </dialog>
+
+    <p class="success-message" id="success-message" hidden>
+      Форма успешно отправлена!
+    </p>
   </body>
 </html>

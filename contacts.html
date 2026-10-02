@@ -15,32 +15,55 @@
     />
     <meta
       property="og:image"
-      content="https://25WAGG3DOU2.github.io/kr1-html-css-shop/images/preview.jpg"
+      content="https://25wagg3dou2.github.io/kr1-html-css-shop/images/preview.jpg"
     />
 
     <title>Контакты — Учебный интернет-магазин</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("shop:theme");
+          var theme =
+            saved === "light" || saved === "dark"
+              ? saved
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.dataset.theme = theme;
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/main.js" defer></script>
   </head>
   <body>
     <header class="site-header">
       <div class="site-header__inner">
-        <a class="site-header__logo" href="index.html">ShopProject</a>
+        <a class="site-header__logo" href="index.html">GamingLARP</a>
 
         <nav class="site-nav" aria-label="Основная навигация">
           <ul class="site-nav__list">
             <li class="site-nav__item">
-              <a
-                class="site-nav__link site-nav__link--active"
-                href="index.html"
-              >
-                Главная
-              </a>
+              <a class="site-nav__link" href="index.html">Главная</a>
             </li>
             <li class="site-nav__item">
               <a class="site-nav__link" href="catalog.html">Каталог</a>
             </li>
             <li class="site-nav__item">
-              <a class="site-nav__link" href="contacts.html">Контакты</a>
+              <a
+                class="site-nav__link site-nav__link--active"
+                href="contacts.html"
+                aria-current="page"
+              >
+                Контакты
+              </a>
             </li>
             <li class="site-nav__item">
               <a class="site-nav__link" href="index.html#popular">
@@ -49,13 +72,35 @@
             </li>
           </ul>
         </nav>
+
+        <div class="site-header__actions">
+          <a
+            class="favorites-link"
+            href="catalog.html#favorites"
+            aria-label="Избранные товары"
+          >
+            ♥ Избранное
+            <span class="favorites-link__count" data-favorites-count>0</span>
+          </a>
+
+          <button
+            class="theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-label="Переключить тему"
+            aria-pressed="false"
+            title="Переключить тему"
+          >
+            <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+          </button>
+        </div>
       </div>
     </header>
 
     <main>
       <nav class="breadcrumbs" aria-label="Хлебные крошки">
         <a class="breadcrumbs__link" href="index.html">Главная</a>
-        <span class="breadcrumbs__current">Каталог</span>
+        <span class="breadcrumbs__current">Контакты</span>
       </nav>
 
       <section class="section">
@@ -64,7 +109,7 @@
           Здесь размещается контактная информация учебного интернет-магазина.
         </p>
 
-        <ul>
+        <ul class="advantages-list">
           <li>Телефон: +7 (900) 000-00-00</li>
           <li>E-mail: info@example.com</li>
           <li>Адрес: г. Москва, учебный проект</li>
@@ -74,16 +119,121 @@
       <section class="section" id="feedback">
         <h2>Обратная связь</h2>
         <p>
-          Для отправки заявки используйте форму в модальном окне на главной
-          странице.
+          Оставьте заявку — мы свяжемся с вами в удобное время. Форма
+          открывается в модальном окне.
         </p>
-        <a class="button" href="index.html#contacts">Перейти к форме</a>
+        <button class="button" type="button" id="open-order-dialog">
+          Оставить заявку
+        </button>
       </section>
     </main>
 
-    <footer>
+    <footer id="contacts-footer">
       <p>&copy; 2026 Учебный проект. Все права защищены.</p>
       <p>Дисциплина: Фронтенд и бэкенд разработка</p>
     </footer>
+
+    <dialog
+      class="order-dialog"
+      id="order-dialog"
+      aria-labelledby="order-dialog-title"
+    >
+      <h2 id="order-dialog-title">Оформление заявки</h2>
+
+      <form
+        class="order-form"
+        id="order-form"
+        action="#"
+        method="post"
+        novalidate
+      >
+        <input id="selected-product" name="selected-product" type="hidden" />
+
+        <div class="form-field">
+          <label for="order-name">Имя</label>
+          <input
+            id="order-name"
+            name="name"
+            type="text"
+            placeholder="Введите ваше имя"
+            minlength="2"
+            autocomplete="given-name"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="order-email">E-mail</label>
+          <input
+            id="order-email"
+            name="email"
+            type="email"
+            placeholder="example@mail.ru"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="order-phone">Телефон</label>
+          <input
+            id="order-phone"
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            placeholder="+7 (900) 000-00-00"
+            pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
+            required
+          />
+          <small>Формат: +7 (900) 000-00-00</small>
+        </div>
+
+        <div class="form-field">
+          <label for="order-date">Дата связи</label>
+          <input id="order-date" name="date" type="date" />
+        </div>
+
+        <div class="form-field">
+          <label for="order-topic">Тема заявки</label>
+          <select id="order-topic" name="topic" required>
+            <option value="">Выберите тему</option>
+            <option value="product">Заказ товара</option>
+            <option value="consultation">Консультация</option>
+            <option value="delivery">Доставка</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="order-comment">Комментарий</label>
+          <textarea
+            id="order-comment"
+            name="comment"
+            rows="4"
+            placeholder="Укажите дополнительную информацию"
+          ></textarea>
+        </div>
+
+        <div class="form-field form-field--checkbox">
+          <label>
+            <input
+              id="order-agreement"
+              name="agreement"
+              type="checkbox"
+              required
+            />
+            Я согласен на обработку данных
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="close-order-dialog">Закрыть</button>
+          <button type="submit">Отправить заявку</button>
+        </div>
+      </form>
+    </dialog>
+
+    <p class="success-message" id="success-message" hidden>
+      Форма успешно отправлена!
+    </p>
   </body>
 </html>
